@@ -1,0 +1,17 @@
+# Archivos de entorno y credenciales (MongoDB)
+.env
+*.env
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+
+# Archivos de configuración del editor (VS Code)
+.vscode/
+.idea/
