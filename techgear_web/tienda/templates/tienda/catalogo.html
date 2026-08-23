@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>TechGear - Catálogo de Productos</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f8f9fa; margin: 30px; }
+        h1 { color: #d63384; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 1000px; margin: 20px auto; }
+        .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-top: 4px solid #d63384; }
+        .precio { font-weight: bold; color: #198754; font-size: 1.2em; }
+        .stock { color: #6c757d; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <h1>🌸 Catálogo de Productos - TechGear</h1>
+    
+    {% if productos %}
+        <div class="grid">
+            {% for prod in productos %}
+                <div class="card">
+                    <h3>{{ prod.nombre }}</h3>
+                    <p>{{ prod.descripcion }}</p>
+                    <p class="precio">${{ prod.precio }}</p>
+                    <p class="stock">Stock disponible: {{ prod.stock }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p style="text-align: center; color: red;">No se pudieron cargar los productos. Asegúrate de que FastAPI esté corriendo en la otra terminal.</p>
+    {% endif %}
+</body>
+</html>
