@@ -24,7 +24,7 @@ async def root():
 
 @app.post("/productos/", response_model=ProductoResponse, status_code=status.HTTP_201_CREATED, tags=["Productos"])
 async def crear_producto(producto: ProductoCreate):
-    nuevo_prod = producto.dict()
+    nuevo_prod = producto.model_dump()
     result = await producto_collection.insert_one(nuevo_prod)
     creado = await producto_collection.find_one({"_id": result.inserted_id})
     return fix_id(creado)
@@ -53,7 +53,7 @@ async def actualizar_producto(id: str, producto: ProductoCreate):
         raise HTTPException(status_code=400, detail="El ID proporcionado no es válido")
     
     res = await producto_collection.update_one(
-        {"_id": ObjectId(id)}, {"$set": producto.dict()}
+        {"_id": ObjectId(id)}, {"$set": producto.model_dump()}
     )
     if res.matched_count == 0:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
@@ -74,7 +74,7 @@ async def eliminar_producto(id: str):
 
 @app.post("/pedidos/", response_model=PedidoResponse, status_code=status.HTTP_201_CREATED, tags=["Pedidos"])
 async def registrar_pedido(pedido: PedidoCreate):
-    nuevo_pedido = pedido.dict()
+    nuevo_pedido = pedido.model_dump()
     result = await pedido_collection.insert_one(nuevo_pedido)
     creado = await pedido_collection.find_one({"_id": result.inserted_id})
     return fix_id(creado)
