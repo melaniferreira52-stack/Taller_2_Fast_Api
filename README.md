@@ -81,12 +81,12 @@ python manage.py migrate
 ```
 
 ### 5. Levantar el servidor
-Como el backend ya ocupa el puerto **8000**, el frontend debe correrse en un puerto distinto, por ejemplo el **8001**:
+Como el backend ya ocupa el puerto **8000**, el frontend debe correrse en un puerto distinto, por ejemplo el **8080**:
 ```bash
-python manage.py runserver 8001
+python manage.py runserver 8080
 ```
 
-El catálogo quedará disponible en: **http://127.0.0.1:8001/**
+El catálogo quedará disponible en: **http://127.0.0.1:8080/**
 
 ---
 
