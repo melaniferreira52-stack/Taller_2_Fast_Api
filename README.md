@@ -97,7 +97,7 @@ Se necesitan **dos terminales abiertas al mismo tiempo**:
 | Terminal | Carpeta | Comando | URL |
 |---|---|---|---|
 | 1 | `techgear_api` | `uvicorn main:app --reload` | http://127.0.0.1:8000/ |
-| 2 | `techgear_web` | `python manage.py runserver 8001` | http://127.0.0.1:8001/ |
+| 2 | `techgear_web` | `python manage.py runserver 8001` | http://127.0.0.1:8080/ |
 
 Con ambos servidores corriendo, el catálogo en `http://127.0.0.1:8001/` consumirá en tiempo real los productos almacenados en MongoDB Atlas a través de la API.
 
