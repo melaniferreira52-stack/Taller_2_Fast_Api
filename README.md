@@ -2,6 +2,15 @@
 
 Sistema web compuesto por una API REST en FastAPI y un Frontend en Django.
 
+## ✨ Funcionalidades
+
+- **Catálogo público**: lista de productos con imagen, precio y stock, con botón de compra directa.
+- **Checkout**: formulario donde el cliente ingresa su nombre y cantidad; el pedido se crea automáticamente en la API (valida que no se pida más cantidad de la disponible en stock).
+- **Panel de Administración** (`/panel/`):
+  - Gestión de productos: crear, editar y eliminar, incluyendo carga de imagen.
+  - Historial de pedidos realizados, con detalle de cada pedido.
+- **Manejo de errores**: si la API de FastAPI no está disponible, el frontend muestra un mensaje en vez de romperse.
+
 ## 📁 Arquitectura del Proyecto
 
 - `/techgear_api`: Backend desarrollado en FastAPI y MongoDB Atlas.
@@ -103,12 +112,15 @@ TechGear_Project/
 │   ├── models.py
 │   ├── database.py
 │   ├── requirements.txt
-│   └── .env            (no versionado)
+│   └── .env           
 ├── techgear_web/
 │   ├── manage.py
 │   ├── requirements.txt
 │   ├── config/
+│   ├── media/          
 │   └── tienda/
+│       ├── templates/tienda/
+│       └── static/tienda/css
 ├── .gitignore
 └── README.md
 ```
