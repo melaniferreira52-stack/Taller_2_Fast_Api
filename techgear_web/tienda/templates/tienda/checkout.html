@@ -1,0 +1,46 @@
+{% extends 'tienda/base.html' %}
+
+{% block title %}TechGear - Checkout{% endblock %}
+
+{% block content %}
+<div style="max-width:500px; margin:0 auto; background:white; padding:30px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.08);">
+
+    {% if producto %}
+        <h1 style="margin-top:0;">Finalizar Compra</h1>
+
+        <div style="display:flex; gap:16px; align-items:center; margin-bottom:20px;">
+            {% if producto.imagen %}
+                <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}"
+                     style="width:80px; height:80px; object-fit:cover; border-radius:8px;">
+            {% endif %}
+            <div>
+                <h3 style="margin:0;">{{ producto.nombre }}</h3>
+                <p style="margin:4px 0; color:#198754; font-weight:bold;">${{ producto.precio }}</p>
+                <p style="margin:0; color:#6c757d; font-size:0.9em;">Stock disponible: {{ producto.stock }}</p>
+            </div>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <label>Nombre del cliente</label>
+            <input type="text" name="cliente" required
+                   style="width:100%; padding:8px; margin:6px 0 16px 0; box-sizing:border-box;">
+
+            <label>Cantidad</label>
+            <input type="number" name="cantidad" value="1" min="1" max="{{ producto.stock }}" required
+                   style="width:100%; padding:8px; margin:6px 0 20px 0; box-sizing:border-box;">
+
+            <div style="display:flex; justify-content:space-between;">
+                <a href="{% url 'catalogo' %}">Cancelar</a>
+                <button type="submit"
+                        style="background:#198754; color:white; border:none; padding:10px 24px; border-radius:8px; font-weight:bold;">
+                    Confirmar Compra
+                </button>
+            </div>
+        </form>
+    {% else %}
+        <p style="color:red;">No se pudo cargar el producto.</p>
+    {% endif %}
+</div>
+{% endblock %}

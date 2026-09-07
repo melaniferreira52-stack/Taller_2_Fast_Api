@@ -1,29 +1,31 @@
 {% extends 'tienda/base.html' %}
 
-{% block title %}Catálogo de Productos - TechGear{% endblock %}
+{% block title %}TechGear - Catálogo de Productos{% endblock %}
 
 {% block content %}
-    <h1>Catálogo de Productos</h1>
+<h1>Catálogo de Productos</h1>
 
-    {% if productos %}
-        <div class="grid">
-            {% for prod in productos %}
-                <div class="card">
-                    <h3>{{ prod.nombre }}</h3>
-                    <p>{{ prod.descripcion }}</p>
-                    <p class="precio">${{ prod.precio|floatformat:0 }}</p>
-
-                    {% if prod.stock > 0 %}
-                        <p class="stock">Stock disponible: {{ prod.stock }}</p>
-                    {% else %}
-                        <p class="stock agotado">Agotado</p>
-                    {% endif %}
-                </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p style="text-align: center; color: red;">
-            No se pudieron cargar los productos. Asegúrate de que FastAPI esté corriendo en la otra terminal.
-        </p>
-    {% endif %}
+{% if productos %}
+    <div class="grid">
+        {% for prod in productos %}
+            <div class="card">
+                {% if prod.imagen %}
+                    <img src="{{ prod.imagen }}" alt="{{ prod.nombre }}"
+                         style="width:100%; height:150px; object-fit:cover; border-radius:8px; margin-bottom:10px;">
+                {% endif %}
+                <h3>{{ prod.nombre }}</h3>
+                <p>{{ prod.descripcion }}</p>
+                <p class="precio">${{ prod.precio }}</p>
+                <p class="stock">Stock disponible: {{ prod.stock }}</p>
+                <a href="{% url 'checkout' prod.id %}"
+                   style="display:inline-block; background:#198754; color:white; padding:8px 16px;
+                          border-radius:6px; text-decoration:none; font-weight:bold; margin-top:8px;">
+                    🛒 Comprar
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p style="text-align: center; color: red;">No se pudieron cargar los productos. Asegúrate de que FastAPI esté corriendo en la otra terminal.</p>
+{% endif %}
 {% endblock %}

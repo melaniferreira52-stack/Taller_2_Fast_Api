@@ -1,0 +1,51 @@
+{% extends 'tienda/base.html' %}
+
+{% block title %}TechGear - Gestión de Productos{% endblock %}
+
+{% block content %}
+<div style="max-width:1000px; margin:0 auto;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <h1 style="margin:0;">Gestión de Productos</h1>
+        <a href="{% url 'producto_crear' %}"
+           style="background:#198754; color:white; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">
+            + Agregar Producto
+        </a>
+    </div>
+
+    <table style="width:100%; border-collapse:collapse; background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.08);">
+        <thead>
+            <tr style="background:#d63384; color:white; text-align:left;">
+                <th style="padding:12px;">Imagen</th>
+                <th style="padding:12px;">Nombre</th>
+                <th style="padding:12px;">Precio</th>
+                <th style="padding:12px;">Stock</th>
+                <th style="padding:12px;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prod in productos %}
+            <tr style="border-bottom:1px solid #eee;">
+                <td style="padding:12px;">
+                    {% if prod.imagen %}
+                        <img src="{{ prod.imagen }}" alt="{{ prod.nombre }}" style="width:60px; height:60px; object-fit:cover; border-radius:6px;">
+                    {% else %}
+                        <span style="color:#adb5bd;">Sin imagen</span>
+                    {% endif %}
+                </td>
+                <td style="padding:12px;">{{ prod.nombre }}</td>
+                <td style="padding:12px;">${{ prod.precio }}</td>
+                <td style="padding:12px;">{{ prod.stock }}</td>
+                <td style="padding:12px;">
+                    <a href="{% url 'producto_editar' prod.id %}" style="background:#0d6efd; color:white; padding:6px 12px; border-radius:6px; text-decoration:none; margin-right:6px;">Editar</a>
+                    <a href="{% url 'producto_eliminar' prod.id %}" style="background:#dc3545; color:white; padding:6px 12px; border-radius:6px; text-decoration:none;">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="padding:20px; text-align:center; color:#6c757d;">No hay productos registrados todavía.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

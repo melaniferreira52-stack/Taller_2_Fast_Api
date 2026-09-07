@@ -7,6 +7,7 @@ class ProductoBase(BaseModel):
     descripcion: Optional[str] = Field(None, json_schema_extra={"example": "Base fluida acabado natural"})
     precio: float = Field(..., gt=0, json_schema_extra={"example": 45000.0})
     stock: int = Field(..., ge=0, json_schema_extra={"example": 25})
+    imagen: Optional[str] = Field(None, example="/media/productos/mouse.jpg")
 
 class ProductoCreate(ProductoBase):
     pass

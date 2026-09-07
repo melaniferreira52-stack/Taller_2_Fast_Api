@@ -1,0 +1,18 @@
+{% extends 'tienda/base.html' %}
+
+{% block title %}TechGear - Panel Admin{% endblock %}
+
+{% block content %}
+<h1>Panel de Administración</h1>
+
+<div style="max-width:500px; margin: 40px auto; text-align:center;">
+    <a href="{% url 'productos_admin' %}"
+       style="display:inline-block; background:#d63384; color:white; padding:16px 32px;
+              border-radius:10px; text-decoration:none; font-weight:bold; font-size:1.1em;">
+        📦 Ver Productos
+    </a>
+    <p style="color:#6c757d; margin-top:16px;">
+        Gestiona el catálogo: agrega, edita o elimina productos con su imagen.
+    </p>
+</div>
+{% endblock %}

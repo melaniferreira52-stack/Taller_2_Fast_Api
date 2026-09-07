@@ -1,0 +1,39 @@
+{% extends 'tienda/base.html' %}
+
+{% block title %}TechGear - Detalle del Pedido{% endblock %}
+
+{% block content %}
+<div style="max-width:500px; margin:0 auto; background:white; padding:30px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.08);">
+
+    {% if pedido %}
+        <h1 style="margin-top:0;">Detalle del Pedido</h1>
+        <p><strong>ID:</strong> {{ pedido.id }}</p>
+        <p><strong>Cliente:</strong> {{ pedido.cliente }}</p>
+        <p><strong>Total:</strong> ${{ pedido.total|floatformat:1 }} COP</p>
+
+        <h3>Productos</h3>
+        <table style="width:100%; border-collapse:collapse;">
+            <thead>
+                <tr style="background:#d63384; color:white; text-align:left;">
+                    <th style="padding:8px;">Producto</th>
+                    <th style="padding:8px;">Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in pedido.items %}
+                <tr style="border-bottom:1px solid #eee;">
+                    <td style="padding:8px;">{{ item.nombre }}</td>
+                    <td style="padding:8px;">{{ item.cantidad }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p style="color:red;">No se encontró ese pedido.</p>
+    {% endif %}
+
+    <div style="margin-top:20px;">
+        <a href="{% url 'historial_pedidos' %}">← Volver al historial</a>
+    </div>
+</div>
+{% endblock %}
